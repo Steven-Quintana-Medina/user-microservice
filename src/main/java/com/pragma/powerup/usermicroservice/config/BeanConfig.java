@@ -18,7 +18,6 @@ public class BeanConfig {
     private final IUserEntityMapper userEntityMapper;
     private final PasswordEncoder passwordEncoder;
 
-
     @Bean
     public IUserPersistencePort userPersistencePort() {
         return new UserMysqlAdapter(userRepository, userEntityMapper, passwordEncoder);
