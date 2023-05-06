@@ -16,6 +16,7 @@ public class Constants {
     //response code 400
     public static final String DNI_ALREADY_EXISTS_MESSAGE = "A user already exists with this dni";
     public static final String MAIL_ALREADY_EXISTS_MESSAGE = "A person with that mail already exists";
-    public static final String INVALID_PHONE = "a person has an invalid phone number";
-    public static final String UNDER_AGE = "a person is a minor";
+    public static final String INVALID_PHONE = "A person has an invalid phone number";
+    public static final String INVALID_DNI = "A person has an invalid dni";
+    public static final String UNDER_AGE = "A person is a minor";
 }
