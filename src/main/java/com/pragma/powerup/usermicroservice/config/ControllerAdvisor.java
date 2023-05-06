@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.Collections;
 import java.util.Map;
 
-import static com.pragma.powerup.usermicroservice.config.Constants.DNI_ALREADY_EXISTS_MESSAGE;
-import static com.pragma.powerup.usermicroservice.config.Constants.MAIL_ALREADY_EXISTS_MESSAGE;
-import static com.pragma.powerup.usermicroservice.config.Constants.RESPONSE_ERROR_MESSAGE_KEY;
-import static com.pragma.powerup.usermicroservice.config.Constants.UNDER_AGE;
-import static com.pragma.powerup.usermicroservice.config.Constants.INVALID_PHONE;
+import static com.pragma.powerup.usermicroservice.config.Constants.*;
 
 
 @ControllerAdvice
@@ -48,5 +44,11 @@ public class ControllerAdvisor {
             InvalidPhoneException invalidPhoneException) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, INVALID_PHONE));
+    }
+    @ExceptionHandler(InvalidDniException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidDniException(
+            InvalidDniException invalidDniException) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, INVALID_DNI));
     }
 }
