@@ -17,6 +17,7 @@ public class JwtProvider {
     private final Key secretKey;
     @Value("${jwt.expiration}")
     private int expiration;
+
     public JwtProvider(@Value("${jwt.secret}") String key) {
         this.secretKey = Keys.hmacShaKeyFor(key.getBytes());
     }
@@ -26,10 +27,23 @@ public class JwtProvider {
         String rol = userDetails.getAuthorities().toString();
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
-                .claim("roles", rol)
+                .claim("rol", rol)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 180L))
-                .signWith(secretKey,SignatureAlgorithm.HS256)
+                .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    public boolean validate(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
+
+    public String getUserNameFromToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();
     }
 }
