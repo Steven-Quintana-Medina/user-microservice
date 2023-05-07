@@ -14,6 +14,7 @@ public class Constants {
     public static final String PERSON_CREATED_MESSAGE = "User created successfully";
 
     //response code 400
+    public static final String WRONG_CREDENTIALS_MESSAGE = "Wrong credentials";
     public static final String DNI_ALREADY_EXISTS_MESSAGE = "A user already exists with this dni";
     public static final String MAIL_ALREADY_EXISTS_MESSAGE = "A person with that mail already exists";
     public static final String INVALID_PHONE = "A person has an invalid phone number";
