@@ -29,7 +29,7 @@ public class AuthController {
     public ResponseEntity<Map<String,String>> login(@Valid @RequestBody LoginReqDto loginReqDto) {
         JwtResDto token = authHandler.login(loginReqDto);
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token.getToken());
+        headers.set("Authorization", token.getToken());
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,"valid user"));
     }
 }
