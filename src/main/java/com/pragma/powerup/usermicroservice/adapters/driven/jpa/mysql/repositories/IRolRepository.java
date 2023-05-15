@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface IRolRepository extends JpaRepository<RoleEntity,Long> {
     @Query("SELECT name FROM RoleEntity WHERE id = :idRol")
-    String findUserRoleById(@Param("idRol") String idRol);
+    String findUserRoleById(@Param("idRol") Long idRol);
 }

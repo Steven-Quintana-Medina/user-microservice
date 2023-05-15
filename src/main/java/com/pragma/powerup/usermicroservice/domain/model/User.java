@@ -9,9 +9,9 @@ public class User {
     private String birthDate;
     private String mail;
     private String password;
-    private String idRol;
+    private Long idRol;
 
-    public User(Long id, String name, String surname, String dniNumber, String phone, String birthDate, String mail, String password, String idRol) {
+    public User(Long id, String name, String surname, String dniNumber, String phone, String birthDate, String mail, String password, Long idRol) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -83,11 +83,11 @@ public class User {
         this.password = password;
     }
 
-    public String getIdRol() {
+    public Long getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(String idRol) {
+    public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
 }
