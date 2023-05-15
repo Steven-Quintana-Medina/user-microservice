@@ -4,6 +4,12 @@ import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.req.LoginRe
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.res.JwtResDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IAuthHandler;
 import com.pragma.powerup.usermicroservice.config.Constants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collections;
 import java.util.Map;
 
+import static com.pragma.powerup.usermicroservice.config.Constants.*;
 
+
+ @Tag(name = "Authentication", description = "Endpoints related to user authentication")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -25,6 +34,13 @@ public class AuthController {
 
     private final IAuthHandler authHandler;
 
+    @Operation(summary = "login",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = MESSAGE_SUCCESS,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Message"))),
+                    @ApiResponse(responseCode = "404", description = PERSON_NOT_FOUND,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
+            })
     @PostMapping("/login")
     public ResponseEntity<Map<String,String>> login(@Valid @RequestBody LoginReqDto loginReqDto) {
         JwtResDto token = authHandler.login(loginReqDto);
