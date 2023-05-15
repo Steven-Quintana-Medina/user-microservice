@@ -32,13 +32,13 @@ To get a local copy up and running follow these steps.
 
 1. Clone the repository
 2. Open project
-3. Create a new database in MySQL called powerup
+3. Create a new database in MySQL called powerup-user
 4. Update the database connection settings
    ```yml
    # src/main/resources/application-dev.yml
    spring:
       datasource:
-          url: jdbc:mysql://localhost/powerup
+          url: jdbc:mysql://localhost/powerup-user
           username: root
           password: <your-password>
    ```
