@@ -6,4 +6,6 @@ public interface IUserServicePort {
     void saveClient(User user);
 
     void saveOwner(User user);
+
+    boolean getUserOwner(Long id);
 }
