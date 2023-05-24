@@ -1,15 +1,19 @@
 package com.pragma.powerup.usermicroservice.config.security.jwt;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.PrincipalUser;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtProvider {
@@ -23,11 +27,15 @@ public class JwtProvider {
     }
 
 
-    public String generateToken(UserDetails userDetails) {
-        String rol = userDetails.getAuthorities().toString();
+    public String generateToken(Authentication authentication) {
+        PrincipalUser userPrincipal = (PrincipalUser) authentication.getPrincipal();
+        List<String> authorities = userPrincipal.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())
-                .claim("rol", rol)
+                .setSubject(userPrincipal.getUsername())
+                .claim("rol", authorities.get(0))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 180L))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
