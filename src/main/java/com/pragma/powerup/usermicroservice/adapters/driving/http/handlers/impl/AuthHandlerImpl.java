@@ -1,31 +1,31 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.impl;
 
-import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.adapter.UserDetailsServiceImpl;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.req.LoginReqDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.res.JwtResDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IAuthHandler;
 import com.pragma.powerup.usermicroservice.config.security.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.text.ParseException;
 
 @Service
 @RequiredArgsConstructor
 public class AuthHandlerImpl implements IAuthHandler {
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
-
-    @Autowired
-    JwtProvider jwtProvider;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
 
     @Override
     public JwtResDto login(LoginReqDto loginReqDto) {
-        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(loginReqDto.getMail());
-        String jwt = jwtProvider.generateToken(userDetails);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginReqDto.getMail(), loginReqDto.getPassword())
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtProvider.generateToken(authentication);
         return new JwtResDto(jwt);
     }
 }
