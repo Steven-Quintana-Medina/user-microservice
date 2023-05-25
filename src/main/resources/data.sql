@@ -1,5 +1,4 @@
 INSERT INTO `user` (
-    `id`,
     `name`,
     `surname`,
     `dni_number`,
@@ -7,19 +6,18 @@ INSERT INTO `user` (
     `birth_date`,
     `mail`,
     `password`,
-    `id_role`
+    `id_rol`
 
   )
 VALUES
   (
-    '1',
     "daniela",
     "castillo",
     "4443335",
     "+573004014079",
     "01-05-2002",
     "steven0@gmail.com",
-    "$2a$10$GlsGSNhkbVon6ZOSNMptOu5RikedRzlCAhMa7YpwvUSS0c88WT99S",
+    "$2a$10$WbDy3xcppa4UZiyWjFCUGudx5Z4VIfH31q.TdOMQPxWvvVOmE.3ay",
     '1'
   );
 
