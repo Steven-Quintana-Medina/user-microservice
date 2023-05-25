@@ -55,6 +55,21 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, PERSON_CREATED_MESSAGE));
     }
+
+    @Operation(summary = "Add a new employee",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = PERSON_CREATED_MESSAGE,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Message"))),
+                    @ApiResponse(responseCode = "409", description = SWAGGER_PERSON_ERROR,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
+                    @ApiResponse(responseCode = "401", description = WRONG_CREDENTIALS_MESSAGE,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
+            })
+    @PostMapping("create-employee/")
+    public ResponseEntity<Map<String, String>> saveEmployee(@RequestBody UserReqDto userReqDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, "endpoint en progreso"));
+    }
 //get
 @Operation(summary = "valid owner",
         responses = {

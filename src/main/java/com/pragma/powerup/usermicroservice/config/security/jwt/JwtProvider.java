@@ -34,6 +34,7 @@ public class JwtProvider {
                 .collect(Collectors.toList());
 
         return Jwts.builder()
+                .setId(userPrincipal.getId())
                 .setSubject(userPrincipal.getUsername())
                 .claim("rol", authorities.get(0))
                 .setIssuedAt(new Date())
