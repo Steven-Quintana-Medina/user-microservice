@@ -5,8 +5,7 @@ import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.services.UserService;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 
-import static com.pragma.powerup.usermicroservice.domain.utils.Constants.CLIENT_ROLE_ID;
-import static com.pragma.powerup.usermicroservice.domain.utils.Constants.OWNER_ROLE_ID;
+import static com.pragma.powerup.usermicroservice.domain.utils.Constants.*;
 
 public class UserUseCase implements IUserServicePort {
 
@@ -28,6 +27,15 @@ public class UserUseCase implements IUserServicePort {
         UserService.ValidAge(user.getBirthDate());
         UserService.ValidPHone(user.getPhone());
         user.setIdRol(OWNER_ROLE_ID);
+        userPersistencePort.saveUser(user);
+    }
+
+    @Override
+    public void saveEmployee(User user) {
+        UserService.ValidDni(user.getDniNumber());
+        UserService.ValidAge(user.getBirthDate());
+        UserService.ValidPHone(user.getPhone());
+        user.setIdRol(EMPLOYEE_ROLE_ID);
         userPersistencePort.saveUser(user);
     }
 

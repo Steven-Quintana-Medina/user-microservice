@@ -24,6 +24,11 @@ public class UserHandlerImpl implements IUserHandler {
     }
 
     @Override
+    public void saveEmployee(UserReqDto userReqDto) {
+        userServicePort.saveEmployee(userReqMapper.toUser(userReqDto));
+    }
+
+    @Override
     public boolean getUserOwner(Long id) {
         return userServicePort.getUserOwner(id);
     }

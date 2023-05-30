@@ -26,13 +26,14 @@ import static com.pragma.powerup.usermicroservice.config.Constants.*;
 @RequiredArgsConstructor
 public class UserController {
     private final IUserHandler userHandler;
-//post
-@Operation(summary = "Add a new client",
-          responses = {
-    @ApiResponse(responseCode = "201", description = PERSON_CREATED_MESSAGE,
-            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Message"))),
-    @ApiResponse(responseCode = "409", description = SWAGGER_PERSON_ERROR,
-            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+
+    //post
+    @Operation(summary = "Add a new client",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = PERSON_CREATED_MESSAGE,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Message"))),
+                    @ApiResponse(responseCode = "409", description = SWAGGER_PERSON_ERROR,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
     @PostMapping("create-client/")
     public ResponseEntity<Map<String, String>> saveClient(@RequestBody UserReqDto userReqDto) {
         userHandler.saveClient(userReqDto);
@@ -48,7 +49,7 @@ public class UserController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
                     @ApiResponse(responseCode = "401", description = WRONG_CREDENTIALS_MESSAGE,
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
-    })
+            })
     @PostMapping("create-owner/")
     public ResponseEntity<Map<String, String>> saveOwmer(@RequestBody UserReqDto userReqDto) {
         userHandler.saveOwner(userReqDto);
@@ -67,22 +68,24 @@ public class UserController {
             })
     @PostMapping("create-employee/")
     public ResponseEntity<Map<String, String>> saveEmployee(@RequestBody UserReqDto userReqDto) {
+        userHandler.saveEmployee(userReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, "endpoint en progreso"));
     }
-//get
-@Operation(summary = "valid owner",
-        responses = {
-                @ApiResponse(responseCode = "200", description = MESSAGE_SUCCESS,
-                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/MessageBoolean"))),
-                @ApiResponse(responseCode = "401", description = PERSON_NOT_FOUND,
-                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/MessageBoolean"))),
-                @ApiResponse(responseCode = "404", description = WRONG_CREDENTIALS_MESSAGE,
-                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
-        })
-@GetMapping("/owner/{id}")
-public ResponseEntity<Boolean> getUserOwner(@PathVariable Long id) {
-    return ResponseEntity.status(HttpStatus.OK).body(userHandler.getUserOwner(id));
-}
+
+    //get
+    @Operation(summary = "valid owner",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = MESSAGE_SUCCESS,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/MessageBoolean"))),
+                    @ApiResponse(responseCode = "401", description = PERSON_NOT_FOUND,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/MessageBoolean"))),
+                    @ApiResponse(responseCode = "404", description = WRONG_CREDENTIALS_MESSAGE,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
+            })
+    @GetMapping("/owner/{id}")
+    public ResponseEntity<Boolean> getUserOwner(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userHandler.getUserOwner(id));
+    }
 
 }
