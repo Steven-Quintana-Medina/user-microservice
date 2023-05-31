@@ -9,4 +9,6 @@ public interface IUserHandler {
     void saveEmployee(UserReqDto userReqDto);
 
     boolean getUserOwner(Long id);
+
+    boolean getUserEmployee(Long id);
 }

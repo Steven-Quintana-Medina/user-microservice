@@ -9,8 +9,6 @@ import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.pragma.powerup.usermicroservice.domain.utils.Constants.OWNER_ROLE_ID;
-
 @RequiredArgsConstructor
 public class UserMysqlAdapter implements IUserPersistencePort {
     private final IUserRepository userRepository;
@@ -31,8 +29,13 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public boolean getUser(Long id, Long rol) {
-        return userRepository.findUserByIdAndRoleId(id,OWNER_ROLE_ID);
+    public boolean getOwner(Long id, Long rol) {
+        return userRepository.findUserByIdAndRoleId(id,rol);
+    }
+
+    @Override
+    public boolean getEmployee(Long id, Long rol) {
+        return userRepository.findUserByIdAndRoleId(id,rol);
     }
 
 }
