@@ -33,6 +33,12 @@ public class UserUseCaseTest {
     }
 
     @Test
+    public void testSaveEmpoyee() {
+        userUseCase.saveEmployee(USER);
+        verify(userPersistencePort).saveUser(USER);
+    }
+
+    @Test
     public void testGetUserOwner() {
         userUseCase.getUserOwner(VALID_USER_OWNER);
         verify(userPersistencePort).getUser(VALID_USER_OWNER,2L);
