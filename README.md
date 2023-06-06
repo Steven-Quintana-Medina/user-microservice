@@ -47,7 +47,7 @@ copy this string into the "environment variables" field<br>
 <br>
 ![img.png](src/main/resources/img/stepThree.png)
 5. After the tables are created execute src/main/resources/data.sql content to populate the database
-6. Open Swagger UI and search the /auth/login endpoint and login with mail:daniela@gmail.com, password: 1234
+6. Open Swagger UI and search the /auth/login endpoint and login with mail:daniela@gmail.com, password: admin
 
 <!-- USAGE -->
 ## Usage
