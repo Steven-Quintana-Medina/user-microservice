@@ -15,7 +15,7 @@ VALUES
     "castillo",
     "4443335",
     "+573004014079",
-    '01-05-2002',
+    STR_TO_DATE("01-05-2002", "%d-%m-%Y"),
     "daniela@gmail.com",
     "$2a$10$WbDy3xcppa4UZiyWjFCUGudx5Z4VIfH31q.TdOMQPxWvvVOmE.3ay",
     '1'
