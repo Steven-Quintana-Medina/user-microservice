@@ -70,7 +70,7 @@ public class UserController {
     public ResponseEntity<Map<String, String>> saveEmployee(@RequestBody UserReqDto userReqDto) {
         userHandler.saveEmployee(userReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, "endpoint en progreso"));
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, PERSON_CREATED_MESSAGE));
     }
 
     //get
@@ -86,6 +86,20 @@ public class UserController {
     @GetMapping("/owner/{id}")
     public ResponseEntity<Boolean> getUserOwner(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userHandler.getUserOwner(id));
+    }
+
+    @Operation(summary = "valid employee",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = MESSAGE_SUCCESS,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/MessageBoolean"))),
+                    @ApiResponse(responseCode = "401", description = PERSON_NOT_FOUND,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/MessageBoolean"))),
+                    @ApiResponse(responseCode = "404", description = WRONG_CREDENTIALS_MESSAGE,
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
+            })
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<Boolean> getUserEmployee(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userHandler.getUserEmployee(id));
     }
 
 }

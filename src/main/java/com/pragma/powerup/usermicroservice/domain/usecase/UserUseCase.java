@@ -41,6 +41,11 @@ public class UserUseCase implements IUserServicePort {
 
     @Override
     public boolean getUserOwner(Long id) {
-        return userPersistencePort.getUser(id,OWNER_ROLE_ID);
+        return userPersistencePort.getOwner(id,OWNER_ROLE_ID);
+    }
+
+    @Override
+    public boolean getUserEmployee(Long id) {
+        return userPersistencePort.getEmployee(id,EMPLOYEE_ROLE_ID);
     }
 }

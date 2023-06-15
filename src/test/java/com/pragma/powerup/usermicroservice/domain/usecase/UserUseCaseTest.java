@@ -1,6 +1,5 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
-import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,6 +40,6 @@ public class UserUseCaseTest {
     @Test
     public void testGetUserOwner() {
         userUseCase.getUserOwner(VALID_USER_OWNER);
-        verify(userPersistencePort).getUser(VALID_USER_OWNER,2L);
+        verify(userPersistencePort).getOwner(VALID_USER_OWNER,2L);
     }
 }

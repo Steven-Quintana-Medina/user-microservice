@@ -32,4 +32,9 @@ public class UserHandlerImpl implements IUserHandler {
     public boolean getUserOwner(Long id) {
         return userServicePort.getUserOwner(id);
     }
+
+    @Override
+    public boolean getUserEmployee(Long id) {
+        return userServicePort.getUserEmployee(id);
+    }
 }
