@@ -83,7 +83,7 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = WRONG_CREDENTIALS_MESSAGE,
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
             })
-    @GetMapping("/owner/{id}")
+    @GetMapping("owner/{id}")
     public ResponseEntity<Boolean> getUserOwner(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userHandler.getUserOwner(id));
     }
@@ -97,9 +97,13 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = WRONG_CREDENTIALS_MESSAGE,
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
             })
-    @GetMapping("/employee/{id}")
+    @GetMapping("employee/{id}")
     public ResponseEntity<Boolean> getUserEmployee(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userHandler.getUserEmployee(id));
+    }
+    @GetMapping("client/{id}")
+    public ResponseEntity<String> getUserClient(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(userHandler.getUserClient(id));
     }
 
 }
