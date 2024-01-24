@@ -1,28 +1,24 @@
 version: '3.9'
 
 services:
-  user_microservice_db:
-    container_name: user_microservice_db
-    image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_DATABASE: user_microservice_db
-      MYSQL_ROOT_PASSWORD: 12345
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
     ports:
-      - 3306:3306
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: user_microservice
+      MYSQL_ROOT_PASSWORD: 12345
 
-  user_microservice_app:
-    container_name: user_microservice_app
-    image: user-microservice:1.0.0
+  springboot-app:
     build: .
     ports:
-      - 8080:8080
-    depends_on:
-      - user_microservice_db
+      - "8080:8080"
     environment:
-      - DATABASE_URL=jdbc:mysql://user_microservice_db/user_microservice_db
-      - DATABASE_USERNAME=root
-      - DATABASE_PASSWORD=12345
-      - KEYSECRET_SECURITY=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.nZU_gPcMXkWpkCUpJceSxS7lSickF0tTImHhAR949Z-Nt69LgW8G6lid-mqd9B579tYM8C4FN2jdhR2VRMsjtA
-      - EXPIRE_DAYS_SECURITY=3600000
+      #DATABASE_URL:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: 12345
+      KEYSECRET_SECURITY: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.nZU_gPcMXkWpkCUpJceSxS7lSickF0tTImHhAR949Z-Nt69LgW8G6lid-mqd9B579tYM8C4FN2jdhR2VRMsjtA
+      EXPIRE_DAYS_SECURITY: 3600000
+    depends_on:
+      - mysqldb

@@ -9,6 +9,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    generate-ddl: true
+    show-sql: true
 jwt:
   secret: ${KEYSECRET_SECURITY}
   expiration: ${EXPIRE_DAYS_SECURITY}
