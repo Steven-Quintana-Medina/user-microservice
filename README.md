@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-<h3 align="center">USER MICROSERVICE</h3>
+<h3 align="center">USER MICROSERVICE FOR PLAZOLETA SERVICE</h3>
 
 </div>
 
@@ -11,11 +11,22 @@
 * ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 * ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
 
+## About the Project
+
+This is a microservice in charge of creating personal information of clients and staff of a small square, also with an authorization and authentication system.
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these steps.
+To view how the project works go to https://user-microservice-small-square-app.onrender.com/swagger-ui/index.html credentials admin:
+
+## test credentials
+
+* admin:
+  * email: daniela@gmail.com
+  * password: admin
+
+To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
@@ -28,31 +39,24 @@ To get a local copy up and running follow these steps.
 * Postman [https://www.postman.com/downloads/](https://www.postman.com/downloads/)
 
 ### Installation
-
 1. Clone the repository
 2. Open project
-3. Create a new database in MySQL called powerup-user
+3. Create a new database in MySQL
 4. update environment variables
-   <br>
-   4.1. edit configurations<br>
-   ![#](src/main/resources/img/stepOne.png)
-   <br>
-   4.2. DATABASE_URL=;DATABASE_USERNAME=;DATABASE_PASSWORD=;SERVER_PORT=;EXPIRE_DAYS_SECURITY=;KEYSECRET_SECURITY=;
-   <br>
-   copy this string into the "environment variables" field<br>
-   ![#](src/main/resources/img/stepTwo.png)
-   <br>
-   4.3 writes the respective values of each environment variable
-   <br>
-   ![img.png](src/main/resources/img/stepThree.png)
-5. You must send the bearer token to be able to use some functionalities of this microservice
+   - DATABASE_URL=;
+   - DATABASE_USERNAME=;
+   - DATABASE_PASSWORD=;
+   - SERVER_PORT=;
+   - EXPIRE_DAYS_SECURITY=;
+   - KEYSECRET_SECURITY=;
+
+note: You must send the bearer token to be able to use some functionalities of this microservice
+
 <!-- USAGE -->
 ## Usage
-
 1. Right-click the class PowerUpApplication and choose Run
 2. Open [http://localhost:8090/swagger-ui/index.html](http://localhost:8090/swagger-ui/index.html) in your web browser
 
 <!-- ROADMAP -->
 ## Tests
-
 - Right-click the test folder and choose Run tests with coverage
