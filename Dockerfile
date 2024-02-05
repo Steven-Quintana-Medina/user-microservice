@@ -9,7 +9,7 @@ RUN ./gradlew bootJar --no-daemon
 
 FROM openjdk:17-jdk-slim
 
-EXPOSE 8080
+EXPOSE ${SERVER_PORT}
 
 COPY --from=build /build/libs/*.jar app.jar
 
